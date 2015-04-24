@@ -1,17 +1,13 @@
-local Cube, parent = torch.class('nnexp.Cube','nn.Module')
+local Cube, parent = torch.class('nn.Cube','nn.Module')
 
 function Cube:__init(b)
    parent.__init(self)
-   self._squareInput = torch.Tensor()
 end
 
 function Cube:updateOutput(input)
-   self._squareInput = torch.cmul(input, input)
-   self.output = torch.cmul(input, self._squareInput)
-   return self.output
+   return input.nn.Cube_updateOutput(self, input)
 end
 
 function Cube:updateGradInput(input, gradOutput)
-   self.gradInput = torch.cmul(gradOutput, self._squareInput)
-   return self.gradInput
+   return input.nn.Cube_updateGradInput(self, input, gradOutput)
 end
